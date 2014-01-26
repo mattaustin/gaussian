@@ -43,7 +43,7 @@ class Feed(object):
         return self.title.encode('utf-8')
 
     def get_stories(self, order='oldest', read_filter='unread',
-                    include_story_content=False):
+                    include_story_content=True):
         """Get the stories for this feed.
 
         :returns: List of :py:class:`~gaussian.stories.Story` instances.
@@ -65,8 +65,8 @@ class Feed(object):
         """Mark all stories in this feed as read."""
 
         response = self._api_client.session.post(
-                self._api_client._construct_url('/reader/mark_feed_as_read'),
-                data={'feed_id': self.id})
+            self._api_client._construct_url('/reader/mark_feed_as_read'),
+            data={'feed_id': self.id})
         return response.json()['result'] == 'ok'
 
     @property

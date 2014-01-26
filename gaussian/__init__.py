@@ -117,3 +117,28 @@ class NewsBlur(object):
         assert response.json()['result'] == 'ok'
         self.logged_in = True
         return True
+
+    def mark_as_read(self, days=0):
+        """Mark all stories from all feeds as read.
+
+        :param int days: Number of days back to mark as read. Default: 0 (all).
+
+        """
+
+        response = self.session.post(
+            self._construct_url('/reader/mark_all_as_read'),
+            data={'days': days})
+        return response.json()['result'] == 'ok'
+
+    def mark_stories_as_read(self, stories):
+        """Mark provided stories as read.
+
+        :param list stories: List of :py:class:`~gaussian.stories.Story`
+            instances.
+
+        """
+
+        response = self.session.post(
+            self._construct_url('/reader/mark_story_hashes_as_read'),
+            data={'story_hash': [story.hash for story in stories]})
+        return response.json()['result'] == 'ok'
