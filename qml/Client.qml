@@ -39,6 +39,16 @@ Python {
             });
         });
     }
+    
+    function logout() {
+        importModule('gaussian.qmlexperiment', function() {
+            busy = true;
+            call('gaussian.qmlexperiment.client.logout', [], function() {
+                logged_in = false;
+                busy = false;
+            });
+        });
+    }
 
     function getFeeds() {
         importModule('gaussian.qmlexperiment', function() {

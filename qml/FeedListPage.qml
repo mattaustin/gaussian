@@ -32,6 +32,7 @@ Page {
     ListView {
 
         id: feedList
+        visible: !client.busy
         anchors.fill: parent
 
         delegate: ListItem.Standard {
@@ -50,6 +51,22 @@ Page {
             flickableItem: parent
         }
 
+    }
+
+    tools: ToolbarItems {
+        ToolbarButton {
+	    visible: !client.busy && client.logged_in
+            action: Action {
+                text: 'Log out'
+                iconSource: Qt.resolvedUrl('image://theme/system-log-out')
+                onTriggered: {logout()}
+            }
+        }
+    }
+
+    function logout() {
+        client.logout();
+        pageStack.push(loginPage);
     }
 
 }
