@@ -81,6 +81,7 @@ Page {
 
     function logout() {
         client.logout();
+        pageStack.clear();
         pageStack.push(loginPage);
     }
 
