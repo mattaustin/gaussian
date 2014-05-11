@@ -41,7 +41,7 @@ Page {
         delegate: ListItem.Standard {
             width: parent.width
             height: visible ? undefined : 0
-            visible: feedList.showUnread || modelData.nt
+            visible: !modelData.exception_code && (feedList.showUnread || modelData.nt)
             text: modelData.feed_title
             iconSource: modelData.favicon_color ? modelData.favicon_url : 'https://www.newsblur.com' + modelData.favicon_url
             fallbackIconSource: Qt.resolvedUrl('image://theme/go-to')
