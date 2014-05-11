@@ -118,6 +118,17 @@ class NewsBlur(object):
         self.logged_in = True
         return True
 
+    def logout(self):
+        """Logout of NewsBlur."""
+
+        response = self.session.post(self._construct_url('/api/logout'))
+        # TODO: properly check for success, it appears server always returns
+        # 200.
+        self._logger.debug(response.content)
+        assert response.json()['result'] == 'ok'
+        self.logged_in = False
+        return True
+
     def mark_as_read(self, days=0):
         """Mark all stories from all feeds as read.
 
