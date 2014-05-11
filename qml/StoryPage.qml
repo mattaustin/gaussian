@@ -40,7 +40,9 @@ Page {
             text: story ? story.story_content : ''
             textFormat: TextEdit.RichText //TextEdit.AutoText
             activeFocusOnPress: false
+            clip: true
             cursorVisible: false
+            focus: false
             readOnly: true
             selectByMouse: false
             wrapMode: TextEdit.Wrap
