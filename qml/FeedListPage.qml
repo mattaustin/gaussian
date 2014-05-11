@@ -32,12 +32,19 @@ Page {
     ListView {
 
         id: feedList
+
+        property bool showUnread: false
+
         visible: !client.busy
         anchors.fill: parent
 
         delegate: ListItem.Standard {
             width: parent.width
+            height: visible ? undefined : 0
+            visible: feedList.showUnread || modelData.nt
             text: modelData.feed_title
+            iconSource: modelData.favicon_color ? modelData.favicon_url : 'https://www.newsblur.com' + modelData.favicon_url
+            fallbackIconSource: Qt.resolvedUrl('image://theme/go-to')
             onClicked: {
                 print(JSON.stringify(modelData));
                 storyListPage.model = null;
@@ -54,6 +61,14 @@ Page {
     }
 
     tools: ToolbarItems {
+        ToolbarButton {
+            visible: !client.busy && client.logged_in
+            action: Action {
+                text: feedList.showUnread ? 'Unread' : 'All'
+                iconSource: Qt.resolvedUrl('image://theme/filter')
+                onTriggered: {feedList.showUnread = !feedList.showUnread;}
+            }
+        }
         ToolbarButton {
 	    visible: !client.busy && client.logged_in
             action: Action {
