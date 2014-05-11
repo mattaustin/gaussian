@@ -29,11 +29,28 @@ Page {
         running: client.busy
     }
 
-    TextArea {
+    Flickable {
         anchors.fill: parent
-        text: story ? story.story_content : ''
-        textFormat: TextEdit.AutoText
-        readOnly: true
+        contentHeight: edit.contentHeight//childrenRect.height//edit.paintedHeight
+
+        TextEdit {
+            id: edit
+            anchors.fill: parent
+            anchors.margins: units.gu(2)
+            text: story ? story.story_content : ''
+            textFormat: TextEdit.RichText //TextEdit.AutoText
+            activeFocusOnPress: false
+            cursorVisible: false
+            readOnly: true
+            selectByMouse: false
+            wrapMode: TextEdit.Wrap
+            onLinkActivated: {Qt.openUrlExternally(link);}
+        }
+
+        Scrollbar {
+            flickableItem: parent
+        }
+
     }
 
     tools: ToolbarItems {
