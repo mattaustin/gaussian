@@ -49,7 +49,7 @@ Page {
                 print(JSON.stringify(modelData));
                 storyListPage.model = null;
                 storyListPage.feed = modelData;
-                client.getStories(modelData);
+                client.getStories(modelData, feedList.showUnread);
                 pageStack.push(storyListPage);
             }
         }

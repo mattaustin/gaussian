@@ -26,6 +26,6 @@ def set_client(username, password):
 def get_feeds():
     return [f._data for f in client.get_feeds()]
 
-def get_stories(feed_data):
+def get_stories(feed_data, read_filter='unread'):
     feed_id = feed_data['id']
-    return [s._data for s in Feed(feed_id, client, data=feed_data).get_stories(read_filter='all')]
+    return [s._data for s in Feed(feed_id, client, data=feed_data).get_stories(read_filter=read_filter)]

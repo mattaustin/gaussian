@@ -39,7 +39,7 @@ Python {
             });
         });
     }
-    
+
     function logout() {
         importModule('gaussian.qmlexperiment', function() {
             busy = true;
@@ -60,10 +60,11 @@ Python {
         });
     }
 
-    function getStories(feedData) {
-        importModule('gaussian.qmlexperiment', function() {
+    function getStories(feedData, showUnread) {
+      var readFilter = showUnread ? 'all' : 'unread'
+      importModule('gaussian.qmlexperiment', function() {
             busy = true;
-            call('gaussian.qmlexperiment.get_stories', [feedData], function(result) {
+            call('gaussian.qmlexperiment.get_stories', [feedData, readFilter], function(result) {
                 storyListPage.model = result;
                 busy = false;
             });

@@ -1,0 +1,24 @@
+logging
+exceptions
+timeouts
+tests
+
+required login decorator
+
+
+custom response parsing on response to check for result == 'ok', and return json?
+
+
+
+Log EVERYTHING
+--------------
+
+import logging
+
+logging.basicConfig()
+logging.getLogger().setLevel(logging.DEBUG)
+
+
+import httplib
+
+httplib.HTTPConnection.debuglevel = 1
