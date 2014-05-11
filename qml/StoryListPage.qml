@@ -52,4 +52,15 @@ Page {
 
     }
 
+    tools: ToolbarItems {
+        ToolbarButton {
+            visible: storyListPage.feed.feed_link ? true : false
+            action: Action {
+                text: 'Web'
+                iconSource: Qt.resolvedUrl('image://theme/external-link')
+                onTriggered: {Qt.openUrlExternally(storyListPage.feed.feed_link);}
+            }
+        }
+    }
+
 }

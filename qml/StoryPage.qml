@@ -36,4 +36,15 @@ Page {
         readOnly: true
     }
 
+    tools: ToolbarItems {
+        ToolbarButton {
+            visible: storyPage.story.story_permalink ? true : false
+            action: Action {
+                text: 'Web'
+                iconSource: Qt.resolvedUrl('image://theme/external-link')
+                onTriggered: {Qt.openUrlExternally(storyPage.story.story_permalink);}
+            }
+        }
+    }
+
 }
