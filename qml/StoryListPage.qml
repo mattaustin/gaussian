@@ -35,9 +35,10 @@ Page {
         id: storyList
         anchors.fill: parent
 
-        delegate: ListItem.Standard {
+        delegate: ListItem.Subtitled {
             width: parent.width
             text: modelData.story_title
+            subText: modelData.short_parsed_date
             onClicked: {
                 print(JSON.stringify(modelData));
                 storyPage.story = modelData;
