@@ -15,6 +15,7 @@
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components.Popups 0.1
 
 
 Page {
@@ -52,14 +53,33 @@ Page {
 
     }
 
+    Component {
+        id: linkSelectionPopover
+        ActionSelectionPopover {
+            actions: ActionList {
+                Action {
+                    text: 'Open website'
+                    onTriggered: {Qt.openUrlExternally(storyListPage.feed.feed_link);}
+                }
+                Action {
+                    text: 'Copy website url'
+                    onTriggered: {Clipboard.push(storyListPage.feed.feed_link);}
+                }
+                Action {
+                    text: 'Copy feed url'
+                    onTriggered: {Clipboard.push(storyListPage.feed.feed_address);}
+                }
+            }
+        }
+    }
+
     tools: ToolbarItems {
         ToolbarButton {
+            id: linkButton
             visible: storyListPage.feed.feed_link ? true : false
-            action: Action {
-                text: 'Web'
-                iconSource: Qt.resolvedUrl('image://theme/external-link')
-                onTriggered: {Qt.openUrlExternally(storyListPage.feed.feed_link);}
-            }
+            iconSource: Qt.resolvedUrl('image://theme/external-link')
+            text: 'Link'
+            onTriggered: PopupUtils.open(linkSelectionPopover, linkButton)
         }
     }
 

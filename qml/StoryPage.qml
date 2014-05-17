@@ -65,7 +65,7 @@ Page {
                     onTriggered: {Qt.openUrlExternally(storyPage.story.story_permalink);}
                 }
                 Action {
-                    text: 'Copy'
+                    text: 'Copy url'
                     onTriggered: {Clipboard.push(storyPage.story.story_permalink);}
                 }
                 //Action {
