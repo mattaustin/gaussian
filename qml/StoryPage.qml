@@ -15,6 +15,7 @@
 import QtQuick 2.0
 import Ubuntu.Components 0.1
 import Ubuntu.Components.ListItems 0.1 as ListItem
+import Ubuntu.Components.Popups 0.1
 
 
 Page {
@@ -31,14 +32,14 @@ Page {
 
     Flickable {
         anchors.fill: parent
-        contentHeight: edit.contentHeight//childrenRect.height//edit.paintedHeight
+        contentHeight: childrenRect.height //edit.paintedHeight//edit.contentHeight//
 
         TextEdit {
             id: edit
             anchors.fill: parent
             anchors.margins: units.gu(2)
             text: story ? story.story_content : ''
-            textFormat: TextEdit.RichText //TextEdit.AutoText
+            textFormat: TextEdit.AutoText //TextEdit.RichText
             activeFocusOnPress: false
             clip: true
             cursorVisible: false
@@ -55,14 +56,33 @@ Page {
 
     }
 
+    Component {
+        id: linkSelectionPopover
+        ActionSelectionPopover {
+            actions: ActionList {
+                Action {
+                    text: 'Open in web browser'
+                    onTriggered: {Qt.openUrlExternally(storyPage.story.story_permalink);}
+                }
+                Action {
+                    text: 'Copy'
+                    onTriggered: {Clipboard.push(storyPage.story.story_permalink);}
+                }
+                //Action {
+                //    text: 'Email'
+                //    onTriggered: {}
+                //}
+            }
+        }
+    }
+
     tools: ToolbarItems {
         ToolbarButton {
+            id: linkButton
             visible: storyPage.story.story_permalink ? true : false
-            action: Action {
-                text: 'Web'
-                iconSource: Qt.resolvedUrl('image://theme/external-link')
-                onTriggered: {Qt.openUrlExternally(storyPage.story.story_permalink);}
-            }
+            iconSource: Qt.resolvedUrl('image://theme/external-link')
+            text: 'Link'
+            onTriggered: PopupUtils.open(linkSelectionPopover, linkButton)
         }
     }
 
