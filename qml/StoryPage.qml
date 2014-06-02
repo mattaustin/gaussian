@@ -77,6 +77,21 @@ Page {
     }
 
     tools: ToolbarItems {
+
+        ToolbarButton {
+            id: readStatusButton
+            visible: !client.busy && storyPage.story
+            iconSource: storyPage.story.read_status ? Qt.resolvedUrl('image://theme/torch-off') : Qt.resolvedUrl('image://theme/torch-on')
+            text: storyPage.story.read_status ? 'Mark unread' : 'Mark read'
+            onTriggered: {
+                var status = storyPage.story.read_status ? false : true;
+                client.toggleStoryReadStatus(storyPage.story, status, function() {
+                    storyPage.story.read_status = status;
+                    storyPage.story = storyPage.story;
+                });
+            }
+        }
+
         ToolbarButton {
             id: linkButton
             visible: storyPage.story.story_permalink ? true : false
@@ -84,18 +99,7 @@ Page {
             text: 'Link'
             onTriggered: PopupUtils.open(linkSelectionPopover, linkButton)
         }
-        ToolbarButton {
-            id: readStatusButton
-            visible: storyPage.story
-            iconSource: storyPage.story.read_status ? Qt.resolvedUrl('image://theme/torch-off') : Qt.resolvedUrl('image://theme/torch-on')
-            text: storyPage.story.read_status ? 'Mark unread' : 'Mark read'
-            onTriggered: {
-                var status = new Boolean(!storyPage.story.read_status);
-                client.toggleStoryReadStatus(storyPage.story, status, function() {
-                    storyPage.story.read_status = status;
-                });
-            }
-        }
+
     }
 
 }
