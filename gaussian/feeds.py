@@ -37,10 +37,10 @@ class Feed(object):
         self._data = data or {}
 
     def __repr__(self):
-        return b'<{0}: {1}>'.format(self.__class__.__name__, self)
+        return '<{0}: {1}>'.format(self.__class__.__name__, self)
 
     def __str__(self):
-        return self.title.encode('utf-8')
+        return '{0}'.format(self.title)
 
     def get_stories(self, order='oldest', read_filter='unread',
                     include_story_content=True):

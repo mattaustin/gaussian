@@ -64,8 +64,8 @@ class NewsBlur(object):
             self.login()
 
     def __repr__(self):
-        username = self.username.encode('utf-8') if self.username else b''
-        return b'<{0}: {1}>'.format(self.__class__.__name__, username)
+        username = self.username or ''
+        return '<{0}: {1}>'.format(self.__class__.__name__, username)
 
     def _get_logger(self):
         return logging.getLogger(__name__)

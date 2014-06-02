@@ -37,10 +37,10 @@ class Story(object):
         self._data = data or {}
 
     def __repr__(self):
-        return b'<{0}: {1}>'.format(self.__class__.__name__, self)
+        return '<{0}: {1}>'.format(self.__class__.__name__, self)
 
     def __str__(self):
-        return self.title.encode('utf-8')
+        return '{0}'.format(self.title)
 
     @property
     def content(self):
@@ -53,7 +53,8 @@ class Story(object):
 
     @property
     def feed_id(self):
-        return self._data.get('story_feed_id', None)
+        feed_id = self._data.get('story_feed_id', False)
+        return int(feed_id) if feed_id else None
 
     @property
     def hash(self):
