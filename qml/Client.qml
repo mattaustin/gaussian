@@ -71,4 +71,14 @@ Python {
         });
     }
 
+    function toggleStoryReadStatus(storyData, readStatus, callback) {
+      importModule('gaussian.qmlexperiment', function() {
+            busy = true;
+            call('gaussian.qmlexperiment.toggle_story_read_status', [storyData, readStatus], function(result) {
+                busy = false;
+                typeof callback === 'function' && callback();
+            });
+        });
+    }
+
 }

@@ -32,7 +32,7 @@ Page {
 
     Flickable {
         anchors.fill: parent
-        contentHeight: childrenRect.height //edit.paintedHeight//edit.contentHeight//
+        contentHeight: edit.paintedHeight //edit.contentHeight//childrenRect.height
 
         TextEdit {
             id: edit
@@ -83,6 +83,18 @@ Page {
             iconSource: Qt.resolvedUrl('image://theme/external-link')
             text: 'Link'
             onTriggered: PopupUtils.open(linkSelectionPopover, linkButton)
+        }
+        ToolbarButton {
+            id: readStatusButton
+            visible: storyPage.story
+            iconSource: storyPage.story.read_status ? Qt.resolvedUrl('image://theme/torch-off') : Qt.resolvedUrl('image://theme/torch-on')
+            text: storyPage.story.read_status ? 'Mark unread' : 'Mark read'
+            onTriggered: {
+                var status = new Boolean(!storyPage.story.read_status);
+                client.toggleStoryReadStatus(storyPage.story, status, function() {
+                    storyPage.story.read_status = status;
+                });
+            }
         }
     }
 

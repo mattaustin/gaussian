@@ -46,7 +46,6 @@ Page {
             iconSource: modelData.favicon_color ? modelData.favicon_url : 'https://www.newsblur.com' + modelData.favicon_url
             fallbackIconSource: Qt.resolvedUrl('image://theme/go-to')
             onClicked: {
-                print(JSON.stringify(modelData));
                 storyListPage.model = null;
                 storyListPage.feed = modelData;
                 client.getStories(modelData, feedList.showUnread);
@@ -70,7 +69,7 @@ Page {
             }
         }
         ToolbarButton {
-	    visible: !client.busy && client.logged_in
+            visible: !client.busy && client.logged_in
             action: Action {
                 text: 'Log out'
                 iconSource: Qt.resolvedUrl('image://theme/system-log-out')

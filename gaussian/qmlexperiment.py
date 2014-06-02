@@ -17,6 +17,7 @@
 
 from __future__ import absolute_import, unicode_literals
 from gaussian import NewsBlur, Feed
+from gaussian.stories import Story
 
 
 def set_client(username, password):
@@ -29,3 +30,7 @@ def get_feeds():
 def get_stories(feed_data, read_filter='unread'):
     feed_id = feed_data['id']
     return [s._data for s in Feed(feed_id, client, data=feed_data).get_stories(read_filter=read_filter)]
+
+def toggle_story_read_status(story_data, read_status):
+    story = Story(story_data['id'], client, data=story_data)
+    return story.mark_as_read() if read_status else story.mark_as_unread()

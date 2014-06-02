@@ -41,7 +41,6 @@ Page {
             text: modelData.story_title
             subText: modelData.short_parsed_date
             onClicked: {
-                print(JSON.stringify(modelData));
                 storyPage.story = modelData;
                 pageStack.push(storyPage);
             }
