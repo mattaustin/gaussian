@@ -81,7 +81,7 @@ Page {
         ToolbarButton {
             id: readStatusButton
             visible: !client.busy && storyPage.story
-            iconSource: storyPage.story.read_status ? Qt.resolvedUrl('image://theme/torch-off') : Qt.resolvedUrl('image://theme/torch-on')
+            iconSource: storyPage.story.read_status ? Qt.resolvedUrl('image://theme/torch-on') : Qt.resolvedUrl('image://theme/torch-off')
             text: storyPage.story.read_status ? 'Mark unread' : 'Mark read'
             onTriggered: {
                 var status = storyPage.story.read_status ? false : true;
