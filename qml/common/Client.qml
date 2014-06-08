@@ -22,7 +22,7 @@ Python {
     property bool logged_in: false
 
     Component.onCompleted: {
-        addImportPath(Qt.resolvedUrl('..').substr('file://'.length));
+        addImportPath(Qt.resolvedUrl('../..').substr('file://'.length));
     }
 
     onError: {
