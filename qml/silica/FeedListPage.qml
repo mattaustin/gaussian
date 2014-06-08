@@ -56,17 +56,29 @@ Page {
         delegate: BackgroundItem {
 
             id: item
-            width: parent.width
+            width: feedList.width
+            implicitHeight: visible ? undefined : 0
             height: visible ? Theme.itemSizeSmall : 0
-
             visible: !modelData.exception_code && (feedList.showUnread || modelData.nt)
 
-            Label {
-                text: modelData.feed_title
-                color: item.down ? Theme.highlightColor : Theme.primaryColor
-                truncationMode: TruncationMode.Fade
-                anchors.verticalCenter: parent.verticalCenter
+            Item {
+
                 x: Theme.paddingLarge
+                anchors.verticalCenter: parent.verticalCenter
+                width: parent.width - 2*Theme.paddingLarge
+                height: childrenRect.height
+
+                Label {
+                    text: modelData.feed_title
+                    color: item.down ? Theme.highlightColor : Theme.primaryColor
+                    truncationMode: TruncationMode.Fade
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                    }
+                }
+
             }
 
             onClicked: {
