@@ -23,7 +23,7 @@ Page {
 
     BusyIndicator {
         anchors.centerIn: parent
-        running: client.busy
+        running: client.busy && !storyPage.story
     }
 
     SilicaFlickable {
@@ -68,6 +68,9 @@ Page {
             PageHeader {
                 id: header
                 title: story ? story.story_title : 'Story'
+                wrapMode: Text.Wrap
+                //horizontalAlignment: Text.AlignRight
+                //maximumLineCount: 2
             }
 
             TextEdit {

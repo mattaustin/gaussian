@@ -56,12 +56,12 @@ Page {
 
             id: item
             width: storyList.width
-            implicitHeight: Theme.itemSizeMedium
+            implicitHeight: Theme.itemSizeLarge
 
             Item {
 
                 x: Theme.paddingLarge
-                anchors.verticalCenter: parent.verticalCenter
+                //anchors.verticalCenter: parent.verticalCenter
                 width: parent.width - 2*Theme.paddingLarge
                 height: childrenRect.height
 
@@ -69,8 +69,10 @@ Page {
                     id: title
                     text: modelData.story_title
                     color: item.down ? Theme.highlightColor : Theme.primaryColor
-                    font.pixelSize: Theme.fontSizeLarge
+                    font.pixelSize: Theme.fontSizeSmall
                     truncationMode: TruncationMode.Fade
+                    wrapMode: Text.Wrap
+                    maximumLineCount: 2
                     anchors {
                         left: parent.left
                         right: parent.right
