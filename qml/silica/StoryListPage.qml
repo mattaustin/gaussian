@@ -23,13 +23,15 @@ Page {
     property alias model: storyList.model
 
     BusyIndicator {
+        id: busyindicator
         anchors.centerIn: parent
-        running: client.busy
+        running: client.busy && !storyList.count
     }
 
     SilicaListView {
 
         id: storyList
+        visible: !busyindicator.running
         anchors.fill: parent
 
         header: PageHeader {

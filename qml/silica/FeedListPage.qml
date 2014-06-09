@@ -22,17 +22,16 @@ Page {
     property alias model: feedList.model
 
     BusyIndicator {
+        id: busyindicator
         anchors.centerIn: parent
-        running: client.busy
+        running: client.busy && !feedList.count
     }
 
     SilicaListView {
 
         id: feedList
-
         property bool showUnread: false
-
-        visible: !client.busy
+        visible: !busyindicator.running
         anchors.fill: parent
 
         header: PageHeader {
