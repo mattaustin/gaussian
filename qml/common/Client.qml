@@ -23,6 +23,7 @@ Python {
 
     Component.onCompleted: {
         addImportPath(Qt.resolvedUrl('../..').substr('file://'.length));
+        addImportPath(Qt.resolvedUrl('..').substr('file://'.length));
     }
 
     onError: {

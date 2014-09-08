@@ -26,6 +26,13 @@ Page {
         running: client.busy && !storyPage.story
     }
 
+    Timer {
+        interval: 2000
+        onTriggered: edit.text = story ? story.story_content : ''
+        repeat: true
+        running: true
+    }
+
     SilicaFlickable {
 
         id: flickable
